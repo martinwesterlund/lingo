@@ -3,7 +3,7 @@ import { words } from "@/data/words";
 import { keyboard } from "@/data/keyboard";
 import ConfettiExplosion from "react-confetti-explosion";
 
-const index = () => {
+export default function Home() {
   const [correctWord, setCorrectWord] = useState([]);
 
   const [guess, setGuess] = useState("");
@@ -277,6 +277,7 @@ const index = () => {
       <div className="w-screen flex justify-center gap-x-1">
         {keyboard[0].map((button) => (
           <button
+            key={button}
             className="bg-gray-100 w-10 h-10 md:h-12 md:w-12 rounded-lg"
             onClick={() => setGuess(guess + button.toLowerCase())}
           >
@@ -287,6 +288,7 @@ const index = () => {
       <div className="w-screen flex justify-center gap-x-1">
         {keyboard[1].map((button) => (
           <button
+            key={button}
             className="bg-gray-100 w-10 h-10 md:h-12 md:w-12 rounded-lg"
             onClick={() => setGuess(guess + button.toLowerCase())}
           >
@@ -297,6 +299,7 @@ const index = () => {
       <div className="w-screen flex justify-center gap-x-1">
         {keyboard[2].map((button) => (
           <button
+            key={button}
             className="bg-gray-100 w-10 h-10 md:h-12 md:w-12 rounded-lg"
             onClick={() => setGuess(guess + button.toLowerCase())}
           >
@@ -336,5 +339,3 @@ const index = () => {
     </div>
   );
 };
-
-export default index;
