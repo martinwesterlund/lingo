@@ -3,7 +3,7 @@ import { keyboard } from "@/data/keyboard";
 import { words } from "@/data/words";
 import ConfettiExplosion from "react-confetti-explosion";
 
-const index3 = () => {
+function index3() {
   const [correctWord, setCorrectWord] = useState("");
   const [guess, setGuess] = useState("");
   const [gameField, setGameField] = useState([]);
