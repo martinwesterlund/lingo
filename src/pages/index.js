@@ -67,7 +67,7 @@ export default function Home() {
         fiveLetteredWords[
           Math.floor(Math.random() * fiveLetteredWords.length)
         ].toLowerCase();
-      resolve("atlas");
+      resolve(word);
     });
   };
 
