@@ -33,6 +33,13 @@ export default function Home() {
 
   const initGameField = async () => {
     setRound(1);
+    setCorrectState([
+      { correct: true },
+      { correct: false },
+      { correct: false },
+      { correct: false },
+      { correct: false },
+    ]);
     setShowCorrectWord(false);
     setIsExploding(false);
     setPlayLocked(false);
