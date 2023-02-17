@@ -274,7 +274,6 @@ export default function Home() {
         ))}
       </div>
       <span className="w-[80vw] h-px my-8 bg-yellow-500"></span>
-      {/* <div>{playLocked ? 'locked' : 'not locked'}</div> */}
       <div className="grid grid-cols-5 place-items-center gap-1">
         {guess
           .slice(0, 5)
@@ -282,7 +281,7 @@ export default function Home() {
           .map((l, index) => (
             <span
               key={index}
-              className="w-12 h-12 circle border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full"
+              className="w-12 h-12 circle border-black border text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
             >
               {l}
             </span>
@@ -291,18 +290,23 @@ export default function Home() {
           correctWord.split("").map((l, index) => (
             <span
               key={index}
-              className="w-12 h-12 circle border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full"
+              className="w-12 h-12 circle--correct border-black border text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
             >
               {l}
             </span>
           ))}
       </div>
       {(showCorrectWord || isExploding) && (
-        <button onClick={startNewGame}>Nästa ord</button>
+        <button
+          className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+          onClick={startNewGame}
+        >
+          Nästa ord
+        </button>
       )}
 
       <div
-        className={`w-full sm:w-[80vw] flex flex-col gap-y-1 absolute bottom-16 sm:bottom-2 px-2  ${
+        className={`w-full flex flex-col gap-y-1 absolute bottom-16 sm:bottom-2 px-2 text-xs sm:text-base  ${
           showErrorAnimation ? "wrong-word" : ""
         }`}
       >
@@ -310,7 +314,7 @@ export default function Home() {
           {keyboard[0].map((button) => (
             <button
               key={button}
-              className="bg-gray-100 h-8 md:h-12 rounded-lg grow"
+              className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
               onClick={() =>
                 setGuess((prev) => (prev + button.toLowerCase()).slice(0, 5))
               }
@@ -323,7 +327,7 @@ export default function Home() {
           {keyboard[1].map((button) => (
             <button
               key={button}
-              className="bg-gray-100 h-8 md:h-12 rounded-lg grow"
+              className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
               onClick={() =>
                 setGuess((prev) => (prev + button.toLowerCase()).slice(0, 5))
               }
@@ -336,7 +340,7 @@ export default function Home() {
           {keyboard[2].map((button) => (
             <button
               key={button}
-              className="bg-gray-100 h-8 md:h-12 rounded-lg grow"
+              className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
               onClick={() =>
                 setGuess((prev) => (prev + button.toLowerCase()).slice(0, 5))
               }
@@ -345,7 +349,7 @@ export default function Home() {
             </button>
           ))}
           <button
-            className="bg-gray-100 grid place-items-center shrink-0 rounded-lg grow-[2]"
+            className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
             onClick={() => setGuess((prev) => prev.slice(0, -1))}
           >
             <svg
@@ -354,7 +358,7 @@ export default function Home() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-4 h-4 sm:w-6 sm:h-6"
             >
               <path
                 strokeLinecap="round"
@@ -364,7 +368,7 @@ export default function Home() {
             </svg>
           </button>
           <button
-            className="bg-gray-100 grid place-items-center shrink-0 rounded-lg grow-[2]"
+            className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
             onClick={(e) => submitGuess(e)}
           >
             <svg
@@ -373,7 +377,7 @@ export default function Home() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-4 h-4 sm:w-6 sm:h-6"
             >
               <path
                 strokeLinecap="round"

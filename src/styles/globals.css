@@ -7,7 +7,7 @@
 }
 
 .circle--correct {
-  background: radial-gradient(circle at 80% 50%, #6fff6a, rgb(0, 99, 20));
+  background: radial-gradient(circle at 80% 50%, #6fff6a, #006314);
 }
 
 .wrong-word{
