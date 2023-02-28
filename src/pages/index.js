@@ -10,275 +10,275 @@ import { MongoClient } from 'mongodb'
 
 
 export default function Home({toplist}) {
-  const [correctWord, setCorrectWord] = useState("");
-  const [guess, setGuess] = useState("");
-  const [gameField, setGameField] = useState([]);
-  const [round, setRound] = useState(1);
-  const [showCorrectWord, setShowCorrectWord] = useState(false);
-  const [showErrorAnimation, setShowErrorAnimation] = useState(false);
-  const [playLocked, setPlayLocked] = useState(true);
-  const [correctState, setCorrectState] = useState([
-    { correct: true },
-    { correct: false },
-    { correct: false },
-    { correct: false },
-    { correct: false },
-  ]);
+//   const [correctWord, setCorrectWord] = useState("");
+//   const [guess, setGuess] = useState("");
+//   const [gameField, setGameField] = useState([]);
+//   const [round, setRound] = useState(1);
+//   const [showCorrectWord, setShowCorrectWord] = useState(false);
+//   const [showErrorAnimation, setShowErrorAnimation] = useState(false);
+//   const [playLocked, setPlayLocked] = useState(true);
+//   const [correctState, setCorrectState] = useState([
+//     { correct: true },
+//     { correct: false },
+//     { correct: false },
+//     { correct: false },
+//     { correct: false },
+//   ]);
 
-  const [points, setPoints] = useState(0)
-  const [inARow, setInARow] = useState(0)
+//   const [points, setPoints] = useState(0)
+//   const [inARow, setInARow] = useState(0)
 
-  const [isExploding, setIsExploding] = useState(false);
+//   const [isExploding, setIsExploding] = useState(false);
 
-  const [sounds, setSounds] = useState([]);
+//   const [sounds, setSounds] = useState([]);
 
-  const addScore = async (data) => {
-    console.log(data)
-    const response = await fetch("/api/new-score", {
-        method: "POST", 
-        body: JSON.stringify(data),
-        headers: {
-            "content-Type" : "application/json"
-        }
-    }) 
-    const res = await response.json()
-    router.push("/")
-}
+//   const addScore = async (data) => {
+//     console.log(data)
+//     const response = await fetch("/api/new-score", {
+//         method: "POST", 
+//         body: JSON.stringify(data),
+//         headers: {
+//             "content-Type" : "application/json"
+//         }
+//     }) 
+//     const res = await response.json()
+//     router.push("/")
+// }
   
 
-  useEffect(() => {
-    setSounds([
-      new Audio("./correctletter.mp3"),
-      new Audio("./presentletter.mp3"),
-      new Audio("./wrongletter.mp3"),
-    ]);
-  }, []);
+//   useEffect(() => {
+//     setSounds([
+//       new Audio("./correctletter.mp3"),
+//       new Audio("./presentletter.mp3"),
+//       new Audio("./wrongletter.mp3"),
+//     ]);
+//   }, []);
 
-  const initGameField = async () => {
-    setRound(1);
-    setCorrectState([
-      { correct: true },
-      { correct: false },
-      { correct: false },
-      { correct: false },
-      { correct: false },
-    ]);
-    setShowCorrectWord(false);
-    setIsExploding(false);
-    setPlayLocked(false);
-    let newWord = await getWordFromDb();
-    setCorrectWord(newWord);
-    return new Promise((resolve) => {
-      let squares = [];
-      for (let i = 0; i < 25; i++) {
-        if (i == 0) {
-          squares.push({
-            value: newWord.charAt(0),
-            correct: true,
-            presentInCorrectWord: false,
-          });
-        } else {
-          squares.push({
-            value: "",
-            correct: false,
-            presentInCorrectWord: false,
-          });
-        }
-      }
-      setGameField(squares);
-      resolve();
-    });
-  };
+//   const initGameField = async () => {
+//     setRound(1);
+//     setCorrectState([
+//       { correct: true },
+//       { correct: false },
+//       { correct: false },
+//       { correct: false },
+//       { correct: false },
+//     ]);
+//     setShowCorrectWord(false);
+//     setIsExploding(false);
+//     setPlayLocked(false);
+//     let newWord = await getWordFromDb();
+//     setCorrectWord(newWord);
+//     return new Promise((resolve) => {
+//       let squares = [];
+//       for (let i = 0; i < 25; i++) {
+//         if (i == 0) {
+//           squares.push({
+//             value: newWord.charAt(0),
+//             correct: true,
+//             presentInCorrectWord: false,
+//           });
+//         } else {
+//           squares.push({
+//             value: "",
+//             correct: false,
+//             presentInCorrectWord: false,
+//           });
+//         }
+//       }
+//       setGameField(squares);
+//       resolve();
+//     });
+//   };
 
-  const getWordFromDb = async () => {
-    return new Promise((resolve) => {
-      let fiveLetteredWords = words.filter((word) => word.length == 5);
-      let word =
-        fiveLetteredWords[
-          Math.floor(Math.random() * fiveLetteredWords.length)
-        ].toLowerCase();
-        console.log(word)
-      resolve(word);
-    });
-  };
+//   const getWordFromDb = async () => {
+//     return new Promise((resolve) => {
+//       let fiveLetteredWords = words.filter((word) => word.length == 5);
+//       let word =
+//         fiveLetteredWords[
+//           Math.floor(Math.random() * fiveLetteredWords.length)
+//         ].toLowerCase();
+//         console.log(word)
+//       resolve(word);
+//     });
+//   };
 
-  const startNewGame = async () => {
-    await initGameField();
-    setPoints(0)
-    setInARow(0)
-  };
+//   const startNewGame = async () => {
+//     await initGameField();
+//     setPoints(0)
+//     setInARow(0)
+//   };
 
-  const checkGuess = async (guess, word) => {
-    const result = [];
-    const correctIndexes = [];
-    let semiCorrectIndexes = [];
+//   const checkGuess = async (guess, word) => {
+//     const result = [];
+//     const correctIndexes = [];
+//     let semiCorrectIndexes = [];
 
-    // Check for correct letters in correct positions
-    for (let i = 0; i < guess.length; i++) {
-      if (guess[i] === word[i]) {
-        result.push({ value: guess[i], correct: true, semiCorrect: false });
-        correctIndexes.push(i);
-        const newState = [...correctState];
-        newState[i].correct = true;
-        setCorrectState(newState);
-      } else {
-        result.push({ value: guess[i], correct: false, semiCorrect: false });
-      }
-    }
+//     // Check for correct letters in correct positions
+//     for (let i = 0; i < guess.length; i++) {
+//       if (guess[i] === word[i]) {
+//         result.push({ value: guess[i], correct: true, semiCorrect: false });
+//         correctIndexes.push(i);
+//         const newState = [...correctState];
+//         newState[i].correct = true;
+//         setCorrectState(newState);
+//       } else {
+//         result.push({ value: guess[i], correct: false, semiCorrect: false });
+//       }
+//     }
 
-    // Check for semi-correct letters
-    for (let i = 0; i < guess.length; i++) {
-      if (!correctIndexes.includes(i)) {
-        for (let j = 0; j < word.length; j++) {
-          if (
-            !correctIndexes.includes(j) &&
-            guess[i] === word[j] &&
-            !semiCorrectIndexes.includes(j)
-          ) {
-            result[i].semiCorrect = true;
-            semiCorrectIndexes.push(j);
-            break;
-          }
-        }
-      }
-    }
-    return result;
-  };
+//     // Check for semi-correct letters
+//     for (let i = 0; i < guess.length; i++) {
+//       if (!correctIndexes.includes(i)) {
+//         for (let j = 0; j < word.length; j++) {
+//           if (
+//             !correctIndexes.includes(j) &&
+//             guess[i] === word[j] &&
+//             !semiCorrectIndexes.includes(j)
+//           ) {
+//             result[i].semiCorrect = true;
+//             semiCorrectIndexes.push(j);
+//             break;
+//           }
+//         }
+//       }
+//     }
+//     return result;
+//   };
 
-  const playSound = (num) => {
-    sounds[num].currentTime = 0;
-    sounds[num].play();
+//   const playSound = (num) => {
+//     sounds[num].currentTime = 0;
+//     sounds[num].play();
 
-    num = num % sounds.length;
+//     num = num % sounds.length;
 
-    if (num % 2 === 0) {
-      sounds[num].currentTime = 0;
-      sounds[num].play();
-    }
-  };
+//     if (num % 2 === 0) {
+//       sounds[num].currentTime = 0;
+//       sounds[num].play();
+//     }
+//   };
 
-  const detectKeyPress = (e) => {
-    if (
-      [...keyboard[0], ...keyboard[1], ...keyboard[2]].includes(
-        e.key.toUpperCase()
-      )
-    ) {
-      setGuess((prevGuess) => (prevGuess + e.key.toLowerCase()).slice(0, 5));
-    } else if (e.key == "Backspace") {
-      setGuess((prevGuess) => prevGuess.slice(0, -1));
-    } else if (e.key == "Enter") {
-      setGuess((prevGuess) => prevGuess);
-      submitGuess(e);
-    }
-  };
+//   const detectKeyPress = (e) => {
+//     if (
+//       [...keyboard[0], ...keyboard[1], ...keyboard[2]].includes(
+//         e.key.toUpperCase()
+//       )
+//     ) {
+//       setGuess((prevGuess) => (prevGuess + e.key.toLowerCase()).slice(0, 5));
+//     } else if (e.key == "Backspace") {
+//       setGuess((prevGuess) => prevGuess.slice(0, -1));
+//     } else if (e.key == "Enter") {
+//       setGuess((prevGuess) => prevGuess);
+//       submitGuess(e);
+//     }
+//   };
 
-  const checkIfCorrectWord = (word) => {
-    let wordToCheck = word.slice(0).slice(-5);
-    if (wordToCheck.every((item) => item.correct === true)) {
-      setIsExploding(true);
-      setPoints((prev) => prev + (6 - round))
-      setInARow((prev) => prev + 1)
-    } else {
-      setTimeout(() => {
-        showCorrectLetters(wordToCheck);
-      }, 2000);
-    }
-  };
+//   const checkIfCorrectWord = (word) => {
+//     let wordToCheck = word.slice(0).slice(-5);
+//     if (wordToCheck.every((item) => item.correct === true)) {
+//       setIsExploding(true);
+//       setPoints((prev) => prev + (6 - round))
+//       setInARow((prev) => prev + 1)
+//     } else {
+//       setTimeout(() => {
+//         showCorrectLetters(wordToCheck);
+//       }, 2000);
+//     }
+//   };
 
-  const checkIfValid = async () => {
-    return new Promise((resolve) => {
-      if (words.filter((word) => word.toLowerCase() == guess).length > 0) {
-        setPlayLocked(true);
-        resolve();
-      } else {
-        setShowErrorAnimation(true);
-        setTimeout(() => {
-          setShowErrorAnimation(false);
-        }, 300);
-        setGuess("");
-      }
-    });
-  };
+//   const checkIfValid = async () => {
+//     return new Promise((resolve) => {
+//       if (words.filter((word) => word.toLowerCase() == guess).length > 0) {
+//         setPlayLocked(true);
+//         resolve();
+//       } else {
+//         setShowErrorAnimation(true);
+//         setTimeout(() => {
+//           setShowErrorAnimation(false);
+//         }, 300);
+//         setGuess("");
+//       }
+//     });
+//   };
 
-  const presentWord = async (word, callback) => {
-    for (let index = 0; index < 5; index++) {
-      ((index) => {
-        setTimeout(function () {
-          setGameField((oldState) => {
-            const newState = [...oldState];
-            newState[index + round * 5 - 5] = word[index];
-            if (word[index].correct) {
-              playSound(0);
-            } else if (word[index].semiCorrect) {
-              playSound(1);
-            } else {
-              playSound(2);
-            }
-            return newState;
-          });
-          if (index == 4) {
-            callback(word);
-          }
-        }, index * 250);
-      })(index);
-    }
-  };
+//   const presentWord = async (word, callback) => {
+//     for (let index = 0; index < 5; index++) {
+//       ((index) => {
+//         setTimeout(function () {
+//           setGameField((oldState) => {
+//             const newState = [...oldState];
+//             newState[index + round * 5 - 5] = word[index];
+//             if (word[index].correct) {
+//               playSound(0);
+//             } else if (word[index].semiCorrect) {
+//               playSound(1);
+//             } else {
+//               playSound(2);
+//             }
+//             return newState;
+//           });
+//           if (index == 4) {
+//             callback(word);
+//           }
+//         }, index * 250);
+//       })(index);
+//     }
+//   };
 
-  const showCorrectLetters = (checkedWord) => {
-    if (round < 5) {
-      for (let index = 0; index < 5; index++) {
-        setGameField((oldState) => {
-          const newState = [...oldState];
-          newState[index + (round + 1) * 5 - 5] = checkedWord[index];
-          if (correctState[index].correct) {
-            newState[index + (round + 1) * 5 - 5] = {
-              value: correctWord.charAt(index),
-              correct: false,
-            };
-          } else {
-            newState[index + (round + 1) * 5 - 5] = {
-              value: "",
-              correct: false,
-            };
-          }
+//   const showCorrectLetters = (checkedWord) => {
+//     if (round < 5) {
+//       for (let index = 0; index < 5; index++) {
+//         setGameField((oldState) => {
+//           const newState = [...oldState];
+//           newState[index + (round + 1) * 5 - 5] = checkedWord[index];
+//           if (correctState[index].correct) {
+//             newState[index + (round + 1) * 5 - 5] = {
+//               value: correctWord.charAt(index),
+//               correct: false,
+//             };
+//           } else {
+//             newState[index + (round + 1) * 5 - 5] = {
+//               value: "",
+//               correct: false,
+//             };
+//           }
 
-          return newState;
-        });
-      }
-      setPlayLocked(false);
-    } else {
-      showCorrectAnswer();
-    }
-  };
+//           return newState;
+//         });
+//       }
+//       setPlayLocked(false);
+//     } else {
+//       showCorrectAnswer();
+//     }
+//   };
 
-  const showCorrectAnswer = () => {
-    setShowCorrectWord(true);
-  };
+//   const showCorrectAnswer = () => {
+//     setShowCorrectWord(true);
+//   };
 
-  const submitGuess = useCallback(async () => {
-    if (!playLocked) {
-      await checkIfValid();
-      let checkedWord = await checkGuess(guess, correctWord);
-      await presentWord(checkedWord, checkIfCorrectWord);
-      setGuess("");
-      setRound((prev) => prev + 1);
-    }
-  });
+//   const submitGuess = useCallback(async () => {
+//     if (!playLocked) {
+//       await checkIfValid();
+//       let checkedWord = await checkGuess(guess, correctWord);
+//       await presentWord(checkedWord, checkIfCorrectWord);
+//       setGuess("");
+//       setRound((prev) => prev + 1);
+//     }
+//   });
 
-  useEffect(() => {
-    document.addEventListener("keydown", detectKeyPress, true);
-    return () => {
-      document.removeEventListener("keydown", detectKeyPress, true);
-    };
-  }, [detectKeyPress]);
+//   useEffect(() => {
+//     document.addEventListener("keydown", detectKeyPress, true);
+//     return () => {
+//       document.removeEventListener("keydown", detectKeyPress, true);
+//     };
+//   }, [detectKeyPress]);
 
-  useEffect(() => {
-    startNewGame();
-  }, []);
+//   useEffect(() => {
+//     startNewGame();
+//   }, []);
 
-  useEffect(() => {
+//   useEffect(() => {
 
-  }, []);
+//   }, []);
 
   return (
     <div className="w-screen h-screen p-2 flex flex-col items-center justify-center bg-[#17468d]">
