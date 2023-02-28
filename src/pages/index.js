@@ -1,9 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { keyboard } from "@/data/keyboard";
 import { words } from "@/data/words";
 import ConfettiExplosion from "react-confetti-explosion";
+import { MongoClient } from 'mongodb'
 
-export default function Home() {
+
+
+
+
+export default function Home({toplist}) {
   const [correctWord, setCorrectWord] = useState("");
   const [guess, setGuess] = useState("");
   const [gameField, setGameField] = useState([]);
@@ -19,9 +25,26 @@ export default function Home() {
     { correct: false },
   ]);
 
+  const [points, setPoints] = useState(0)
+  const [inARow, setInARow] = useState(0)
+
   const [isExploding, setIsExploding] = useState(false);
 
   const [sounds, setSounds] = useState([]);
+
+  const addScore = async (data) => {
+    console.log(data)
+    const response = await fetch("/api/new-score", {
+        method: "POST", 
+        body: JSON.stringify(data),
+        headers: {
+            "content-Type" : "application/json"
+        }
+    }) 
+    const res = await response.json()
+    router.push("/")
+}
+  
 
   useEffect(() => {
     setSounds([
@@ -74,12 +97,15 @@ export default function Home() {
         fiveLetteredWords[
           Math.floor(Math.random() * fiveLetteredWords.length)
         ].toLowerCase();
+        console.log(word)
       resolve(word);
     });
   };
 
   const startNewGame = async () => {
     await initGameField();
+    setPoints(0)
+    setInARow(0)
   };
 
   const checkGuess = async (guess, word) => {
@@ -150,6 +176,8 @@ export default function Home() {
     let wordToCheck = word.slice(0).slice(-5);
     if (wordToCheck.every((item) => item.correct === true)) {
       setIsExploding(true);
+      setPoints((prev) => prev + (6 - round))
+      setInARow((prev) => prev + 1)
     } else {
       setTimeout(() => {
         showCorrectLetters(wordToCheck);
@@ -248,9 +276,15 @@ export default function Home() {
     startNewGame();
   }, []);
 
+  useEffect(() => {
+
+  }, []);
+
   return (
-    <div className="w-screen h-screen p-2 flex flex-col items-center bg-[#17468d]">
-      <div className="absolute top-28 left-1/2 -translate-x-1/2">
+    <div className="w-screen h-screen p-2 flex flex-col items-center justify-center bg-[#17468d]">
+      <Image className="object-cover w-full h-full" fill src="/error.jpg" /> 
+      <div className="bg-black bg-opacity-60 text-white z-10 p-12">Site under construction</div>
+      {/* <div className="absolute top-28 left-1/2 -translate-x-1/2">
         {isExploding && (
           <ConfettiExplosion particleCount={50} particleSize={25} />
         )}
@@ -274,6 +308,7 @@ export default function Home() {
         ))}
       </div>
       <span className="w-[80vw] h-px my-8 bg-yellow-500"></span>
+      <div className="text-white">{points} p | {inARow} ord i rad</div>
       <div className="grid grid-cols-5 place-items-center gap-1">
         {guess
           .slice(0, 5)
@@ -296,15 +331,23 @@ export default function Home() {
             </span>
           ))}
       </div>
-      {(showCorrectWord || isExploding) && (
+      {(isExploding) && (
         <button
           className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
-          onClick={startNewGame}
+          onClick={initGameField}
         >
           Nästa ord
         </button>
       )}
-
+            {(showCorrectWord) && (
+        <button
+          className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+          onClick={startNewGame}
+        >
+          Nytt spel
+        </button>
+      )}
+      <button onClick={() => addScore({name: 'Testare Testare', points: 666})} >Skicka poäng</button>
       <div
         className={`w-full flex flex-col gap-y-1 absolute bottom-16 sm:bottom-2 px-2 text-xs sm:text-base  ${
           showErrorAnimation ? "wrong-word" : ""
@@ -387,7 +430,39 @@ export default function Home() {
             </svg>
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  // const mongoClient = new MongoClient('mongodb+srv://westerlundmartin:ebsuSGmpa4bxDS1R@lingo.iitlhda.mongodb.net/Toplist?retryWrites=true&w=majority')
+  // const response = await mongoClient.db().collection('Toplist').find({}).toArray();
+  // const toplist = await response.text()
+  // console.log('Toplist ', toplist)
+
+  // return {
+  //   props: {
+  //     toplist,
+  //   },
+  // }
+
+
+  try {
+    const mongoClient = new MongoClient(process.env.MONGODB_URI)
+    const db = mongoClient.db("Toplist");
+
+    const toplist = await db
+        .collection("Toplist")
+        .find({})
+        .sort({ metacritic: -1 })
+        .limit(1000)
+        .toArray();
+
+    return {
+        props: { toplist: JSON.parse(JSON.stringify(toplist)) },
+    };
+} catch (e) {
+    console.error(e);
+}
 }
