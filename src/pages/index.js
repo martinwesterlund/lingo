@@ -109,7 +109,6 @@ export default function Home({ toplistOne, toplistTwo }) {
         fiveLetteredWords[
           Math.floor(Math.random() * fiveLetteredWords.length)
         ].toLowerCase();
-      console.log(word);
       resolve(word);
     });
   };
