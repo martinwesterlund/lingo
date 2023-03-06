@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .circle {
-  background: radial-gradient(circle at 80% 50%, #8c90ff, #162d7a);
+  background: radial-gradient(circle at 80% 50%, #c0c0c0, #000047);
 }
 
 .circle--correct {
