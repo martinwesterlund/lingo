@@ -32,7 +32,7 @@ const Splash = () => {
       initial={{ y: 0 }}
       animate={{ y: "-100%" }}
       transition={{ duration: 2, delay: 1.5, ease: [0.71, 0.04, 0.13, 0.95] }}
-      className="absolute w-screen h-screen flex justify-center items-center bg-gray-900 border-b border-gray-800 text-white z-50"
+      className="absolute w-screen h-screen flex justify-center items-center bg-gray-900 shadow-md text-white z-50"
     >
     {/* <div className="absolute w-screen h-screen flex justify-center items-center bg-gray-900 border-b border-gray-800 text-white z-50"> */}
       {letters && (
@@ -42,7 +42,7 @@ const Splash = () => {
             <motion.div
               key={index}
               variants={item}
-              className={`circle circle--correct w-16 h-16 border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full`}
+              className={`circle circle--correct w-8 h-8 md:w-16 md:h-16 border-black border text-white font-bold grid place-items-center text-xl md:text-4xl uppercase rounded-full mx-1`}
             >
               {l}
             </motion.div>

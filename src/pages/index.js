@@ -382,7 +382,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         className="relative w-full flex py-2 px-3 justify-center text-white "
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ delay: 2 }}
+        transition={{ duration: 1, delay: 3.5 }}
       >
         <div
           className={`text-white flex items-center ${
