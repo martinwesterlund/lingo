@@ -8,6 +8,7 @@ import Toplist from "@/components/Toplist";
 import ScoreHighlight from "@/components/ScoreHighlight";
 import Loading from "@/components/Loading";
 import Name from "@/components/Name";
+import Splash from "@/components/Splash";
 
 export default function Home({ toplistOne, toplistTwo }) {
   const [correctWord, setCorrectWord] = useState("");
@@ -342,7 +343,16 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const item = {
     hidden: { opacity: 1, scale: 0 },
-    show: { opacity: 1, scale: 1, transition: {  duration: 0.2, ease: "easeOut", type: "spring", stiffness: 100  } },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.2,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+      },
+    },
   };
 
   return (
@@ -350,6 +360,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       className={`w-screen h-screen overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
     >
       {isLoading && <Loading />}
+      
       <div
         className={`${
           showNameMenu || showToplist
@@ -367,7 +378,12 @@ export default function Home({ toplistOne, toplistTwo }) {
         </>
       )}
 
-      <header className="relative w-full flex py-2 px-3 justify-center text-white ">
+      <motion.header
+        className="relative w-full flex py-2 px-3 justify-center text-white "
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 2 }}
+      >
         <div
           className={`text-white flex items-center ${
             isExploding ? "score-hl-2" : ""
@@ -441,7 +457,7 @@ export default function Home({ toplistOne, toplistTwo }) {
             />
           </svg>
         </button>
-      </header>
+      </motion.header>
 
       <Toplist
         toplist={toplist}
@@ -454,25 +470,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         showNameMenu={showNameMenu}
         setShowNameMenu={setShowNameMenu}
       />
-      {/* <div className="grid grid-cols-5 grid-rows-5 w-[80vw] h-[80vw] sm:w-[70vw] sm:h-[70vw] max-w-sm max-h-[24rem] mx-auto gap-[2px] mt-6">
-        {gameField.map((s, index) => (
-          <div
-            key={index}
-            className={`circle border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full  ${
-              s.correct ? "circle--correct" : ""
-            } ${s.semiCorrect ? "p-[2px]" : ""}`}
-          >
-            <div
-              className={`w-full h-full grid place-items-center text-2xl sm:text-4xl ${
-                s.semiCorrect ? "border-[#e3ff0b] border-4 rounded-full" : ""
-              }`}
-            >
-              {s.value}
-            </div>
-          </div>
-        ))}
-      </div> */}
-      {gameField && (
+      {gameField && !showNameMenu && (
         <motion.div
           variants={container}
           initial="hidden"
@@ -676,6 +674,7 @@ export default function Home({ toplistOne, toplistTwo }) {
           onClick={(e) => setName((prev) => (prev + " ").slice(0, 20))}
         ></button>
       </div>
+      <Splash />
     </div>
   );
 }
