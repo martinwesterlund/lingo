@@ -177,7 +177,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       } else if (e.key == "Backspace") {
         setName((prevName) => prevName.slice(0, -1));
       } else if (e.key == "Enter") {
-        localStorage.setItem("name", name)
+        localStorage.setItem("lingoname", name)
         setShowNameMenu(false);
       } else if (e.key == " ") {
         setName((prevName) => (prevName + " ").slice(0, 20));
@@ -314,10 +314,10 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
-    if(!localStorage.getItem("name")){
+    if(!localStorage.getItem("lingoname")){
       setShowNameMenu(true)
     } else {
-      setName(localStorage.getItem("name"))
+      setName(localStorage.getItem("lingoname"))
     };
     startNewGame();
   }, []);
