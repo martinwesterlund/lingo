@@ -10,8 +10,49 @@
   background: radial-gradient(circle at 80% 50%, #6fff6a, #006314);
 }
 
+.score-hl {
+  animation: hl 1.5s ease-out forwards;
+}
+
+.score-hl-2 {
+  animation: hl2 1s 1s ease-out forwards;
+}
+
 .wrong-word{
   animation: bounce 0.3s forwards;
+}
+
+@keyframes hl {
+  0% {
+    transform: translateX(-50%) translateY(-50%) scale(0.7);
+    top: 50vh;
+    left: 50%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+    top: 32px;
+    opacity: 0;
+  }
+}
+
+@keyframes hl2 {
+  0% {
+    text-shadow: 0;
+  }
+
+  50% {
+    text-shadow: 0 0 20px rgb(255, 255, 255), 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #fff, 0 0 70px #fff, 0 0 80px #fff;
+  }
+
+  100% {
+    text-shadow: 0;
+  }
 }
 
 @keyframes bounce {

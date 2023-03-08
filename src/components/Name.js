@@ -8,7 +8,7 @@ const Name = ({ name, showNameMenu, setShowNameMenu }) => {
       Ditt namn: <span className="ml-4 uppercase"> {name}</span>{" "}
       <span className=" animate-ping">l</span>
       <button
-        className="absolute right-4 bottom-4 text-green-500"
+        className="absolute right-8 bottom-6 text-green-500"
         onClick={() => setShowNameMenu(false)}
       >
         <svg

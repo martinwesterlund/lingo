@@ -4,6 +4,7 @@ import { words } from "@/data/words";
 import ConfettiExplosion from "react-confetti-explosion";
 import { MongoClient } from "mongodb";
 import Toplist from "@/components/Toplist";
+import ScoreHighlight from "@/components/ScoreHighlight";
 import Loading from "@/components/Loading";
 import Name from "@/components/Name";
 
@@ -22,10 +23,12 @@ export default function Home({ toplistOne, toplistTwo }) {
     { correct: false },
     { correct: false },
   ]);
+  const scoreLadder = [10, 25, 50, 75, 100];
 
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState();
   const [showNameMenu, setShowNameMenu] = useState(false);
+  const [highlightScore, setHighlightScore] = useState();
   const [points, setPoints] = useState(0);
   const [inARow, setInARow] = useState(0);
   const [toplist, setToplist] = useState(toplistOne);
@@ -79,6 +82,7 @@ export default function Home({ toplistOne, toplistTwo }) {
     setIsExploding(false);
     setPlayLocked(false);
     let newWord = await getWordFromDb();
+    // console.log(newWord);
     setCorrectWord(newWord);
     return new Promise((resolve) => {
       let squares = [];
@@ -157,13 +161,13 @@ export default function Home({ toplistOne, toplistTwo }) {
   };
 
   const playSound = (num) => {
-    // sounds[num].currentTime = 0;
-    // sounds[num].play();
-    // num = num % sounds.length;
-    // if (num % 2 === 0) {
-    //   sounds[num].currentTime = 0;
-    //   sounds[num].play();
-    // }
+    sounds[num].currentTime = 0;
+    sounds[num].play();
+    num = num % sounds.length;
+    if (num % 2 === 0) {
+      sounds[num].currentTime = 0;
+      sounds[num].play();
+    }
   };
 
   const detectKeyPress = (e) => {
@@ -177,7 +181,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       } else if (e.key == "Backspace") {
         setName((prevName) => prevName.slice(0, -1));
       } else if (e.key == "Enter") {
-        localStorage.setItem("lingoname", name)
+        localStorage.setItem("lingoname", name);
         setShowNameMenu(false);
       } else if (e.key == " ") {
         setName((prevName) => (prevName + " ").slice(0, 20));
@@ -202,7 +206,8 @@ export default function Home({ toplistOne, toplistTwo }) {
     let wordToCheck = word.slice(0).slice(-5);
     if (wordToCheck.every((item) => item.correct === true)) {
       setIsExploding(true);
-      setPoints((prev) => prev + (6 - round));
+      setPoints((prev) => prev + scoreLadder[5 - round]);
+      setHighlightScore(scoreLadder[5 - round]);
       setInARow((prev) => prev + 1);
     } else {
       setTimeout(() => {
@@ -314,12 +319,12 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
-    if(!localStorage.getItem("lingoname")){
-      setName('Anonym')
-      setShowNameMenu(true)
+    if (!localStorage.getItem("lingoname")) {
+      setName("Anonym");
+      setShowNameMenu(true);
     } else {
-      setName(localStorage.getItem("lingoname"))
-    };
+      setName(localStorage.getItem("lingoname"));
+    }
     startNewGame();
   }, []);
 
@@ -336,19 +341,46 @@ export default function Home({ toplistOne, toplistTwo }) {
         } transition-opacity duration-500 fixed w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md `}
       ></div>
 
-      <div className="absolute top-28 left-1/2 -translate-x-1/2">
-        {isExploding && (
-          <ConfettiExplosion particleCount={50} particleSize={25} />
-        )}
-      </div>
+      {isExploding && (
+        <>
+          <div className="absolute top-28 left-1/2 -translate-x-1/2">
+            <ConfettiExplosion particleCount={50} particleSize={25} />
+          </div>
+          <ScoreHighlight score={highlightScore} />
+        </>
+      )}
+
       <header className="relative w-full flex py-2 px-3 justify-center text-white ">
-        <div className="text-white flex items-center">
-          <span className="w-16 bg-white text-black px-4 py-1 -rotate-6 rounded-sm mr-1 text-center">
-            {points}p
-          </span>
-          <span className="w-16 bg-white text-black px-4 py-1 -rotate-6 text-center">
-            {inARow}
-          </span>
+        <div className={`text-white flex items-center ${isExploding ? 'score-hl-2': ''}`}>
+          <div className="text-white mr-4 flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5 mr-2"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                clipRule="evenodd"
+              />
+            </svg>
+
+            <span className="text-yellow-500">{points}</span>
+          </div>
+          <div className="text-white mr-1 flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5 mr-2"
+            >
+              <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
+              <path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />
+            </svg>
+
+            <span className="text-yellow-500">{inARow}</span>
+          </div>
         </div>
         <button
           onClick={() => setShowToplist(true)}
@@ -433,15 +465,6 @@ export default function Home({ toplistOne, toplistTwo }) {
               {l}
             </span>
           ))}
-        {/* {showCorrectWord &&
-          correctWord.split("").map((l, index) => (
-            <span
-              key={index}
-              className="w-12 h-12 circle--correct border-black border text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
-            >
-              {l}
-            </span>
-          ))} */}
         {showCorrectWord && (
           <div className="absolute top-1/2 left-1/2 flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2  bg-black p-12 bg-opacity-80 text-white  text-center rounded-xl">
             <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
@@ -455,8 +478,20 @@ export default function Home({ toplistOne, toplistTwo }) {
                 </span>
               ))}
             </p>
-            <p className=" whitespace-nowrap flex items-center">Du fick <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">{points}</span> poäng</p>
-            <p className=" whitespace-nowrap flex items-center">Du hade <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">{inARow}</span> rätt i rad</p>
+            <p className=" whitespace-nowrap flex items-center">
+              Du fick{" "}
+              <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+                {points}
+              </span>{" "}
+              poäng
+            </p>
+            <p className=" whitespace-nowrap flex items-center">
+              Du hade{" "}
+              <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+                {inARow}
+              </span>{" "}
+              rätt i rad
+            </p>
             <button
               className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
               onClick={startNewGame}
