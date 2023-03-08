@@ -24,7 +24,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   ]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState("Anonym");
+  const [name, setName] = useState();
   const [showNameMenu, setShowNameMenu] = useState(false);
   const [points, setPoints] = useState(0);
   const [inARow, setInARow] = useState(0);
@@ -315,6 +315,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   useEffect(() => {
     if(!localStorage.getItem("lingoname")){
+      setName('Anonym')
       setShowNameMenu(true)
     } else {
       setName(localStorage.getItem("lingoname"))
