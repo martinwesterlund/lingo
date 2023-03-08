@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const Splash = () => {
+const Splash = ({ name }) => {
   const letters = ["L", "I", "N", "G", "O"];
   const container = {
     hidden: { opacity: 0 },
@@ -18,7 +18,7 @@ const Splash = () => {
     show: {
       opacity: 1,
       scale: 1,
-      y:0,
+      y: 0,
       transition: {
         duration: 0.2,
         ease: "easeOut",
@@ -32,12 +32,15 @@ const Splash = () => {
       initial={{ y: 0 }}
       animate={{ y: "-100%" }}
       transition={{ duration: 2, delay: 1.5, ease: [0.71, 0.04, 0.13, 0.95] }}
-      className="absolute w-screen h-screen flex justify-center items-center bg-gray-900 shadow-md text-white z-50"
+      className="absolute w-screen h-screen flex flex-col justify-center items-center bg-gray-900 shadow-md text-white z-50"
     >
-    {/* <div className="absolute w-screen h-screen flex justify-center items-center bg-gray-900 border-b border-gray-800 text-white z-50"> */}
       {letters && (
-        <motion.div className="flex" variants={container} initial="hidden"
-        animate="show">
+        <motion.div
+          className="flex"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
           {letters.map((l, index) => (
             <motion.div
               key={index}
@@ -49,8 +52,10 @@ const Splash = () => {
           ))}
         </motion.div>
       )}
+      {name !== null && name !== "Anonym" && (
+        <p className="text-white mt-12">Välkommen tillbaka {name}!</p>
+      )}
     </motion.div>
-
   );
 };
 

@@ -321,8 +321,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
-    if (localStorage.getItem("lingoname") === null) {
-      console.log(localStorage.getItem("lingoname"))
+    if (localStorage.getItem("lingoname") === null || localStorage.getItem("lingoname") === "Anonym") {
       setName("Anonym");
       setShowNameMenu(true);
     } else {
@@ -330,6 +329,7 @@ export default function Home({ toplistOne, toplistTwo }) {
     }
     startNewGame();
   }, []);
+  
 
   const container = {
     hidden: { opacity: 0 },
@@ -526,17 +526,17 @@ export default function Home({ toplistOne, toplistTwo }) {
               ))}
             </p>
             <p className=" whitespace-nowrap flex items-center">
-              Du fick{" "}
-              <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+              Du fick
+              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
                 {points}
-              </span>{" "}
+              </span>
               poäng
             </p>
             <p className=" whitespace-nowrap flex items-center">
-              Du hade{" "}
-              <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+              Du hade
+              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
                 {inARow}
-              </span>{" "}
+              </span>
               rätt i rad
             </p>
             <button
@@ -675,7 +675,7 @@ export default function Home({ toplistOne, toplistTwo }) {
           onClick={(e) => setName((prev) => (prev + " ").slice(0, 20))}
         ></button>
       </div>
-      <Splash />
+      <Splash name={name} />
     </div>
   );
 }
