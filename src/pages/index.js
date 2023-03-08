@@ -24,7 +24,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   ]);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState("Your name");
+  const [name, setName] = useState("Anonym");
   const [showNameMenu, setShowNameMenu] = useState(false);
   const [points, setPoints] = useState(0);
   const [inARow, setInARow] = useState(0);
@@ -177,6 +177,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       } else if (e.key == "Backspace") {
         setName((prevName) => prevName.slice(0, -1));
       } else if (e.key == "Enter") {
+        localStorage.setItem("name", name)
         setShowNameMenu(false);
       } else if (e.key == " ") {
         setName((prevName) => (prevName + " ").slice(0, 20));
@@ -206,7 +207,7 @@ export default function Home({ toplistOne, toplistTwo }) {
     } else {
       setTimeout(() => {
         showCorrectLetters(wordToCheck);
-      }, 2000);
+      }, 500);
     }
   };
 
@@ -313,12 +314,17 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
+    if(!localStorage.getItem("name")){
+      setShowNameMenu(true)
+    } else {
+      setName(localStorage.getItem("name"))
+    };
     startNewGame();
   }, []);
 
   return (
     <div
-      className={`w-screen h-screen flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
+      className={`w-screen h-screen overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
     >
       {isLoading && <Loading />}
       <div
@@ -436,10 +442,20 @@ export default function Home({ toplistOne, toplistTwo }) {
             </span>
           ))} */}
         {showCorrectWord && (
-          <div className="absolute top-1/2 left-1/2 flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2  bg-black p-12 bg-opacity-80 text-white uppercase text-center rounded-xl">
-            <p className=" whitespace-nowrap">Rätt ord: {correctWord}</p>
-            <p className=" whitespace-nowrap">Du fick {points} poäng</p>
-            <p className=" whitespace-nowrap">Du hade {inARow} rätt i rad</p>
+          <div className="absolute top-1/2 left-1/2 flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2  bg-black p-12 bg-opacity-80 text-white  text-center rounded-xl">
+            <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
+            <p className="flex mb-6">
+              {correctWord.split("").map((l, index) => (
+                <span
+                  key={index}
+                  className="w-8 h-8 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full"
+                >
+                  {l}
+                </span>
+              ))}
+            </p>
+            <p className=" whitespace-nowrap flex items-center">Du fick <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">{points}</span> poäng</p>
+            <p className=" whitespace-nowrap flex items-center">Du hade <span className="w-8 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">{inARow}</span> rätt i rad</p>
             <button
               className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
               onClick={startNewGame}
@@ -604,6 +620,7 @@ export async function getStaticProps() {
         toplistOne: JSON.parse(JSON.stringify(toplist)),
         toplistTwo: JSON.parse(JSON.stringify(inARowToplist)),
       },
+      revalidate: 10,
     };
   } catch (e) {
     console.error(e);

@@ -1,104 +1,70 @@
 const Loading = () => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <svg
-        width="105"
-        height="105"
-        viewBox="0 0 105 105"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="#fff"
-      >
-        <circle cx="12.5" cy="12.5" r="12.5">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center">
+    <p className="text-white">Fel ord...</p>
+    <div className=" flex justify-center fill-white ">
+      
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="20%" fill="current-color">
           <animate
             attributeName="fill-opacity"
             begin="0s"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="12.5" cy="52.5" r="12.5" fill-opacity=".5">
-          <animate
-            attributeName="fill-opacity"
-            begin="100ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="52.5" cy="12.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="300ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="52.5" cy="52.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="600ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="92.5" cy="12.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="800ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="92.5" cy="52.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="400ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="12.5" cy="92.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="700ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="52.5" cy="92.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="500ms"
-            dur="1s"
-            values="1;.2;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="92.5" cy="92.5" r="12.5">
-          <animate
-            attributeName="fill-opacity"
-            begin="200ms"
-            dur="1s"
+            dur="500ms"
             values="1;.2;1"
             calcMode="linear"
             repeatCount="indefinite"
           />
         </circle>
       </svg>
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="20%" fill="current-color">
+          <animate
+            attributeName="fill-opacity"
+            begin="100ms"
+            dur="500ms"
+            values="1;.2;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="20%" fill="current-color">
+          <animate
+            attributeName="fill-opacity"
+            begin="200ms"
+            dur="500ms"
+            values="1;.2;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="20%" fill="current-color">
+          <animate
+            attributeName="fill-opacity"
+            begin="300ms"
+            dur="500ms"
+            values="1;.2;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+      <svg height="40" width="40">
+        <circle cx="20" cy="20" r="20%" fill="current-color">
+          <animate
+            attributeName="fill-opacity"
+            begin="400ms"
+            dur="500ms"
+            values="1;.2;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+    </div>
     </div>
   );
 };
