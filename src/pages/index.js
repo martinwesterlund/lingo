@@ -423,7 +423,7 @@ export default function Home({ toplistOne, toplistTwo }) {
           </svg>
         </button>
         <button
-          className="w-12 h-12 flex justify-center items-center"
+          className="w-12 h-12 flex justify-center items-center hover:text-gray-400"
           onClick={() => setShowNameMenu(true)}
         >
           <svg
