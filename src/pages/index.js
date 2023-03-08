@@ -321,7 +321,8 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
-    if (!localStorage.getItem("lingoname")) {
+    if (localStorage.getItem("lingoname") === null) {
+      console.log(localStorage.getItem("lingoname"))
       setName("Anonym");
       setShowNameMenu(true);
     } else {
