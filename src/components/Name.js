@@ -6,7 +6,7 @@ const Name = ({ name, showNameMenu, setShowNameMenu }) => {
       } transition-all duration-500 ease-in-out left-0 w-full h-32 bg-gray-900 flex justify-center items-center text-white`}
     >
       Ditt namn: <span className="ml-4 uppercase"> {name}</span>{" "}
-      <span className=" animate-ping">l</span>
+      <span className="marker ml-px bg-white h-6 w-px"></span>
       <button
         className="absolute right-8 bottom-6 text-green-500"
         onClick={() => setShowNameMenu(false)}
