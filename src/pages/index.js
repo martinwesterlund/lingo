@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { keyboard } from "@/data/keyboard";
 import { words } from "@/data/words";
 import ConfettiExplosion from "react-confetti-explosion";
@@ -11,7 +12,7 @@ import Name from "@/components/Name";
 export default function Home({ toplistOne, toplistTwo }) {
   const [correctWord, setCorrectWord] = useState("");
   const [guess, setGuess] = useState("");
-  const [gameField, setGameField] = useState([]);
+  const [gameField, setGameField] = useState();
   const [round, setRound] = useState(1);
   const [showCorrectWord, setShowCorrectWord] = useState(false);
   const [showErrorAnimation, setShowErrorAnimation] = useState(false);
@@ -328,6 +329,22 @@ export default function Home({ toplistOne, toplistTwo }) {
     startNewGame();
   }, []);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 1, scale: 0 },
+    show: { opacity: 1, scale: 1, transition: {  duration: 0.2, ease: "easeOut", type: "spring", stiffness: 100  } },
+  };
+
   return (
     <div
       className={`w-screen h-screen overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
@@ -351,7 +368,11 @@ export default function Home({ toplistOne, toplistTwo }) {
       )}
 
       <header className="relative w-full flex py-2 px-3 justify-center text-white ">
-        <div className={`text-white flex items-center ${isExploding ? 'score-hl-2': ''}`}>
+        <div
+          className={`text-white flex items-center ${
+            isExploding ? "score-hl-2" : ""
+          }`}
+        >
           <div className="text-white mr-4 flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -433,7 +454,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         showNameMenu={showNameMenu}
         setShowNameMenu={setShowNameMenu}
       />
-      <div className="grid grid-cols-5 grid-rows-5 w-[80vw] h-[80vw] sm:w-[70vw] sm:h-[70vw] max-w-sm max-h-[24rem] mx-auto gap-[2px] mt-6">
+      {/* <div className="grid grid-cols-5 grid-rows-5 w-[80vw] h-[80vw] sm:w-[70vw] sm:h-[70vw] max-w-sm max-h-[24rem] mx-auto gap-[2px] mt-6">
         {gameField.map((s, index) => (
           <div
             key={index}
@@ -450,7 +471,34 @@ export default function Home({ toplistOne, toplistTwo }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+      {gameField && (
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-5 grid-rows-5 w-[80vw] h-[80vw] sm:w-[70vw] sm:h-[70vw] max-w-sm max-h-[24rem] mx-auto gap-[2px] mt-6"
+        >
+          {gameField.map((s, index) => (
+            <motion.div
+              key={index}
+              variants={item}
+              className={`circle border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full  ${
+                s.correct ? "circle--correct" : ""
+              } ${s.semiCorrect ? "p-[2px]" : ""}`}
+            >
+              <div
+                className={`w-full h-full grid place-items-center text-2xl sm:text-4xl ${
+                  s.semiCorrect ? "border-[#e3ff0b] border-4 rounded-full" : ""
+                }`}
+              >
+                {s.value}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+
       <span className="w-[80vw] sm:w-[70vw] max-w-sm h-px my-6 bg-gray-700"></span>
 
       <div className="grid grid-cols-5 place-items-center gap-1">
