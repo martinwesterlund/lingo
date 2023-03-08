@@ -1,4 +1,4 @@
-const Name = ({ name, showNameMenu, setShowNameMenu }) => {
+const Name = ({ name, showNameMenu, saveName }) => {
   return (
     <div
       className={`fixed ${
@@ -9,7 +9,7 @@ const Name = ({ name, showNameMenu, setShowNameMenu }) => {
       <span className="marker ml-px bg-white h-6 w-px"></span>
       <button
         className="absolute right-8 bottom-6 text-green-500"
-        onClick={() => setShowNameMenu(false)}
+        onClick={() => saveName()}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

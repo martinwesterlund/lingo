@@ -183,8 +183,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       } else if (e.key == "Backspace") {
         setName((prevName) => prevName.slice(0, -1));
       } else if (e.key == "Enter") {
-        localStorage.setItem("lingoname", name);
-        setShowNameMenu(false);
+        saveName()
       } else if (e.key == " ") {
         setName((prevName) => (prevName + " ").slice(0, 20));
       }
@@ -203,6 +202,11 @@ export default function Home({ toplistOne, toplistTwo }) {
       }
     }
   };
+
+  const saveName = () => {
+    localStorage.setItem("lingoname", name);
+    setShowNameMenu(false);
+  }
 
   const checkIfCorrectWord = (word) => {
     let wordToCheck = word.slice(0).slice(-5);
@@ -469,7 +473,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       <Name
         name={name}
         showNameMenu={showNameMenu}
-        setShowNameMenu={setShowNameMenu}
+        saveName={saveName}
       />
       {gameField && !showNameMenu && (
         <motion.div
@@ -649,7 +653,7 @@ export default function Home({ toplistOne, toplistTwo }) {
           <button
             className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
             onClick={(e) =>
-              showNameMenu ? setShowNameMenu(false) : submitGuess(e)
+              showNameMenu ? saveName() : submitGuess(e)
             }
           >
             <svg
