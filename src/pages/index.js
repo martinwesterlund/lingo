@@ -362,7 +362,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   return (
     <div
-      className={`w-screen h-screen overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
+      className={`w-screen h-screen relative overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
     >
       {isLoading && <Loading />}
       
