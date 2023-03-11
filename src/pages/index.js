@@ -335,6 +335,9 @@ export default function Home({ toplistOne, toplistTwo }) {
       setShowNameMenu(true);
     } else {
       setName(localStorage.getItem("lingoname"));
+      setTimeout(() => {
+        setShowGameField(true)
+      }, 3000);
     }
     startNewGame();
   }, []);
@@ -487,7 +490,7 @@ export default function Home({ toplistOne, toplistTwo }) {
             <motion.div
               key={index}
               variants={item}
-              className={`circle border-black border text-white font-bold grid place-items-center text-4xl uppercase rounded-full  ${
+              className={`circle  text-white font-bold grid place-items-center text-4xl uppercase rounded-full  ${
                 s.correct ? "circle--correct" : ""
               } ${s.semiCorrect ? "p-[2px]" : ""}`}
             >
@@ -524,52 +527,12 @@ export default function Home({ toplistOne, toplistTwo }) {
           .map((l, index) => (
             <span
               key={index}
-              className="w-12 h-12 circle border-black border text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
+              className="w-12 h-12 circle  text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
             >
               {l}
             </span>
           ))}
-        {showCorrectWord && (
-          <div className="absolute top-1/2 left-1/2 flex flex-col justify-center items-center -translate-x-1/2 -translate-y-1/2  bg-black p-12 bg-opacity-80 text-white  text-center rounded-xl">
-            <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
-            <p className="flex mb-6">
-              {correctWord.split("").map((l, index) => (
-                <span
-                  key={index}
-                  className="w-8 h-8 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full"
-                >
-                  {l}
-                </span>
-              ))}
-            </p>
-            <p className=" whitespace-nowrap flex items-center">
-              Du fick
-              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
-                {points}
-              </span>
-              poäng
-            </p>
-            <p className=" whitespace-nowrap flex items-center">
-              Du hade
-              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct border-black border text-white font-bold grid place-items-center text-lg uppercase rounded-full">
-                {inARow}
-              </span>
-              rätt i rad
-            </p>
-            <button
-              className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
-              onClick={startNewGame}
-            >
-              Nytt spel
-            </button>
-            <button
-              className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
-              onClick={() => setShowToplist(true)}
-            >
-              Topplistan
-            </button>
-          </div>
-        )}
+        
       </div>
       {isExploding && (
         <button
@@ -690,6 +653,47 @@ export default function Home({ toplistOne, toplistTwo }) {
           onClick={(e) => setName((prev) => (prev + " ").slice(0, 20))}
         ></button>
       </div>
+      {showCorrectWord && (
+          <div className="absolute inset-0 w-full h-full flex flex-col justify-center items-center   bg-black p-12 bg-opacity-50 text-white  text-center rounded-xl">
+            <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
+            <p className="flex mb-6">
+              {correctWord.split("").map((l, index) => (
+                <span
+                  key={index}
+                  className="w-8 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full"
+                >
+                  {l}
+                </span>
+              ))}
+            </p>
+            <p className=" whitespace-nowrap flex items-center mb-2">
+              Du fick
+              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+                {points}
+              </span>
+              poäng
+            </p>
+            <p className=" whitespace-nowrap flex items-center">
+              Du hade
+              <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+                {inARow}
+              </span>
+              rätt i rad
+            </p>
+            <button
+              className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+              onClick={startNewGame}
+            >
+              Nytt spel
+            </button>
+            <button
+              className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+              onClick={() => setShowToplist(true)}
+            >
+              Topplistan
+            </button>
+          </div>
+        )}
       <Splash name={name} />
     </div>
   );

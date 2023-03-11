@@ -45,7 +45,7 @@ const Splash = ({ name }) => {
             <motion.div
               key={index}
               variants={item}
-              className={`circle circle--correct w-8 h-8 md:w-16 md:h-16 border-black border text-white font-bold grid place-items-center text-xl md:text-4xl uppercase rounded-full mx-1`}
+              className={`circle circle--correct w-8 h-8 md:w-16 md:h-16 text-white font-bold grid place-items-center text-xl md:text-4xl uppercase rounded-full mx-1`}
             >
               {l}
             </motion.div>
