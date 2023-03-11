@@ -30,6 +30,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState();
   const [showNameMenu, setShowNameMenu] = useState(false);
+  const [showGameField, setShowGameField] = useState(false)
   const [highlightScore, setHighlightScore] = useState();
   const [points, setPoints] = useState(0);
   const [inARow, setInARow] = useState(0);
@@ -206,6 +207,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   const saveName = () => {
     localStorage.setItem("lingoname", name);
     setShowNameMenu(false);
+    setShowGameField(true)
   };
 
   const checkIfCorrectWord = (word) => {
@@ -473,7 +475,8 @@ export default function Home({ toplistOne, toplistTwo }) {
         setShowToplist={setShowToplist}
       />
       <Name name={name} showNameMenu={showNameMenu} saveName={saveName} />
-      {gameField && !showNameMenu && (
+      {(gameField && showGameField) && (
+        <>
         <motion.div
           variants={container}
           initial="hidden"
@@ -498,10 +501,22 @@ export default function Home({ toplistOne, toplistTwo }) {
             </motion.div>
           ))}
         </motion.div>
+        <div className="w-[80vw] sm:w-[70vw]">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{
+              width: "100%",
+              transition: {
+                delay: 2,
+              },
+            }}
+            className="h-px max-w-sm my-6 mx-auto bg-gray-700"
+          ></motion.div>
+
+        </div>
+        </>
       )}
-
-      <span className="w-[80vw] sm:w-[70vw] max-w-sm h-px my-6 bg-gray-700"></span>
-
+      
       <div className="grid grid-cols-5 place-items-center gap-1">
         {guess
           .slice(0, 5)
