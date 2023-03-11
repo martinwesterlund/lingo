@@ -565,7 +565,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         </button>
       )}
       <div
-        className={`w-full flex flex-col gap-y-1 absolute bottom-16 px-2 text-xs sm:text-base  ${
+        className={`w-full flex flex-col gap-y-1 absolute bottom-16 md:bottom-1 px-2 text-xs sm:text-base  ${
           showErrorAnimation ? "wrong-word" : ""
         }`}
       >

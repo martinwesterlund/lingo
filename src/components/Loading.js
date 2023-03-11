@@ -5,7 +5,7 @@ const Loading = ({isLoading}) => {
         ? "opacity-100"
         : "opacity-0 pointer-events-none"
     } absolute transition-opacity duration-500 w-screen h-screen inset-0 bg-black bg-opacity-50 backdrop-blur-md flex flex-col justify-center items-center z-50`}>
-      <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
+      {isLoading && <><p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
         Du hade fel
       </p>
       <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
@@ -14,6 +14,7 @@ const Loading = ({isLoading}) => {
       <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
         Sparar
       </p>
+      </>}
       <div className=" flex justify-center fill-white">
         <svg height="40" width="40">
           <circle cx="20" cy="20" r="20%" fill="current-color">
