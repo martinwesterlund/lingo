@@ -183,7 +183,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       } else if (e.key == "Backspace") {
         setName((prevName) => prevName.slice(0, -1));
       } else if (e.key == "Enter") {
-        saveName()
+        saveName();
       } else if (e.key == " ") {
         setName((prevName) => (prevName + " ").slice(0, 20));
       }
@@ -206,7 +206,7 @@ export default function Home({ toplistOne, toplistTwo }) {
   const saveName = () => {
     localStorage.setItem("lingoname", name);
     setShowNameMenu(false);
-  }
+  };
 
   const checkIfCorrectWord = (word) => {
     let wordToCheck = word.slice(0).slice(-5);
@@ -325,7 +325,10 @@ export default function Home({ toplistOne, toplistTwo }) {
   }, [detectKeyPress]);
 
   useEffect(() => {
-    if (localStorage.getItem("lingoname") === null || localStorage.getItem("lingoname") === "Anonym") {
+    if (
+      localStorage.getItem("lingoname") === null ||
+      localStorage.getItem("lingoname") === "Anonym"
+    ) {
       setName("Anonym");
       setShowNameMenu(true);
     } else {
@@ -333,7 +336,6 @@ export default function Home({ toplistOne, toplistTwo }) {
     }
     startNewGame();
   }, []);
-  
 
   const container = {
     hidden: { opacity: 0 },
@@ -364,8 +366,8 @@ export default function Home({ toplistOne, toplistTwo }) {
     <div
       className={`w-screen h-screen relative overflow-hidden flex flex-col items-center bg-gradient-to-b from-gray-900 to-gray-800 transition-all duration-700`}
     >
-      {isLoading && <Loading />}
-      
+      <Loading isLoading={isLoading} />
+
       <div
         className={`${
           showNameMenu || showToplist
@@ -470,11 +472,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         showToplist={showToplist}
         setShowToplist={setShowToplist}
       />
-      <Name
-        name={name}
-        showNameMenu={showNameMenu}
-        saveName={saveName}
-      />
+      <Name name={name} showNameMenu={showNameMenu} saveName={saveName} />
       {gameField && !showNameMenu && (
         <motion.div
           variants={container}
@@ -567,7 +565,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         </button>
       )}
       <div
-        className={`w-full flex flex-col gap-y-1 absolute bottom-1 px-2 text-xs sm:text-base  ${
+        className={`w-full flex flex-col gap-y-1 absolute bottom-16 px-2 text-xs sm:text-base  ${
           showErrorAnimation ? "wrong-word" : ""
         }`}
       >
@@ -652,9 +650,7 @@ export default function Home({ toplistOne, toplistTwo }) {
           </button>
           <button
             className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
-            onClick={(e) =>
-              showNameMenu ? saveName() : submitGuess(e)
-            }
+            onClick={(e) => (showNameMenu ? saveName() : submitGuess(e))}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

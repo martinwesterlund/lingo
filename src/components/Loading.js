@@ -1,7 +1,10 @@
-import { motion } from "framer-motion";
-const Loading = () => {
+const Loading = ({isLoading}) => {
   return (
-    <div className="absolute w-screen h-screen inset-0 bg-black bg-opacity-20 backdrop-blur-md flex flex-col justify-center items-center z-50">
+    <div className={`${
+      isLoading
+        ? "opacity-100"
+        : "opacity-0 pointer-events-none"
+    } absolute transition-opacity duration-500 w-screen h-screen inset-0 bg-black bg-opacity-50 backdrop-blur-md flex flex-col justify-center items-center z-50`}>
       <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
         Du hade fel
       </p>
