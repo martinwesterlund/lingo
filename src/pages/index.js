@@ -654,7 +654,7 @@ export default function Home({ toplistOne, toplistTwo }) {
         ></button>
       </div>
       {showCorrectWord && (
-          <div className="absolute inset-0 w-full h-full flex flex-col justify-center items-center   bg-black p-12 bg-opacity-50 text-white  text-center rounded-xl">
+          <div className="absolute inset-0 w-full h-full flex flex-col justify-center items-center   bg-black p-12 bg-opacity-70 text-white  text-center rounded-xl">
             <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
             <p className="flex mb-6">
               {correctWord.split("").map((l, index) => (
