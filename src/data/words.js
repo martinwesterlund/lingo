@@ -497,7 +497,7 @@ export const words = [
   "crawl",
   "crazy",
   "credo",
-  "crêpe",
+  "crepe",
   "cross",
   "culpa",
   "curla",
