@@ -27,6 +27,7 @@ const Splash = ({ name }) => {
       },
     },
   };
+
   return (
     <motion.div
       initial={{ y: 0 }}
