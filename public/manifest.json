@@ -5,5 +5,27 @@
   "scope": "/",
   "start_url": "/",
   "name": "Lingo",
-  "short_name": "Lingo"
+  "short_name": "Lingo",
+  "icons": [
+      {
+          "src": "/128.png",
+          "sizes": "128x128",
+          "type": "image/png"
+      },
+      {
+          "src": "/196.png",
+          "sizes": "196x196",
+          "type": "image/png"
+      },
+      {
+          "src": "/256.png",
+          "sizes": "256x256",
+          "type": "image/png"
+      },
+      {
+          "src": "/512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ]
 }
