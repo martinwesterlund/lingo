@@ -220,7 +220,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const checkIfValid = async () => {
     return new Promise((resolve) => {
-      if (words.filter((word) => word.toLowerCase() == guess).length > 0) {
+      if ((words.filter((word) => word.toLowerCase() == guess).length > 0) && (guess.charAt(0) === correctWord.charAt(0))) {
         setPlayLocked(true);
         resolve();
       } else {
