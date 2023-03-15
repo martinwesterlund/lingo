@@ -5,11 +5,11 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
 
   return (
     <div
-      className={`w-screen h-screen z-30 sm:w-[50vw] xl:w-[25vw] bg-gray-900 text-white fixed ${
+      className={`fixed z-30 h-screen w-screen bg-gray-900 text-white sm:w-[50vw] xl:w-[25vw] ${
         showToplist ? "left-0 sm:left-1/2 xl:left-3/4" : "left-full"
-      } transition-all ease-in-out duration-500 top-0 p-6 overflow-y-auto`}
+      } top-0 overflow-y-auto p-6 transition-all duration-500 ease-in-out`}
     >
-      <h1 className="mb-8 text-shadow text-center">Topp 10</h1>
+      <h1 className="text-shadow mb-8 text-center">Topp 10</h1>
       <button
         className="absolute top-6 right-6"
         onClick={() => setShowToplist(false)}
@@ -20,7 +20,7 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"
@@ -29,12 +29,12 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           />
         </svg>
       </button>
-      <div className="text-center mb-6">
+      <div className="mb-6 text-center">
         <button
           className={`
             ${
               listToShow === "points"
-                ? "text-yellow-500 border rounded-full px-4 py-1"
+                ? "rounded-full border px-4 py-1 text-yellow-500"
                 : "text-gray-500"
             } w-32`}
           onClick={() => setListToShow("points")}
@@ -45,7 +45,7 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           className={`
           ${
             listToShow === "inARow"
-              ? "text-yellow-500 border rounded-full px-4 py-1"
+              ? "rounded-full border px-4 py-1 text-yellow-500"
               : "text-gray-500"
           } w-32`}
           onClick={() => setListToShow("inARow")}
@@ -58,19 +58,19 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           {toplist &&
             toplist.map((item, index) => (
               <li
-                className="w-full relative bg-gray-800 my-1 px-12 py-2 flex justify-between"
+                className="relative my-1 flex w-full justify-between bg-gray-800 px-12 py-2"
                 key={item._id}
               >
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 border w-6 h-6 rounded-full grid place-items-center">
+                <span className="absolute left-2 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full border">
                   {index + 1}
                 </span>
                 <span>{item.name}</span>
-                <div className="text-yellow-500 flex">
+                <div className="flex text-yellow-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-5 h-5 mr-2 absolute right-0 top-1/2 -translate-y-[55%]"
+                    className="absolute right-0 top-1/2 mr-2 h-5 w-5 -translate-y-[55%]"
                   >
                     <path
                       fillRule="evenodd"
@@ -89,19 +89,19 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           {inARowToplist &&
             inARowToplist.map((item, index) => (
               <li
-                className="w-full relative bg-gray-800 my-1 px-12 py-2 flex justify-between"
+                className="relative my-1 flex w-full justify-between bg-gray-800 px-12 py-2"
                 key={item._id}
               >
-                <span className="absolute left-2 top-1/2 -translate-y-1/2 border w-6 h-6 rounded-full grid place-items-center">
+                <span className="absolute left-2 top-1/2 grid h-6 w-6 -translate-y-1/2 place-items-center rounded-full border">
                   {index + 1}
                 </span>
                 <span>{item.name}</span>
-                <div className="text-yellow-500 flex">
+                <div className="flex text-yellow-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    className="w-5 h-5 mr-2 absolute right-0 top-1/2 -translate-y-[55%]"
+                    className="absolute right-0 top-1/2 mr-2 h-5 w-5 -translate-y-[55%]"
                   >
                     <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
                     <path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />

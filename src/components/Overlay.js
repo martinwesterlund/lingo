@@ -4,8 +4,8 @@ const Overlay = ({ showNameMenu, showToplist }) => {
       className={`${
         showNameMenu || showToplist
           ? "opacity-100"
-          : "opacity-0 pointer-events-none"
-      } transition-opacity duration-500 fixed w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md `}
+          : "pointer-events-none opacity-0"
+      } fixed h-screen w-screen bg-black bg-opacity-50 backdrop-blur-md transition-opacity duration-500 `}
     ></div>
   );
 };

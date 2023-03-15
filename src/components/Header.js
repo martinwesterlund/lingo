@@ -9,22 +9,22 @@ const Header = ({
 }) => {
   return (
     <motion.header
-      className="relative w-full flex py-2 pl-6 pr-3 justify-center text-white "
+      className="relative flex w-full justify-center py-2 pl-6 pr-3 text-white "
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 1, delay: 3.5 }}
     >
       <div
-        className={`text-white flex items-center ${
+        className={`flex items-center text-white ${
           isExploding ? "score-hl-2" : ""
         }`}
       >
-        <div className="text-white mr-4 flex">
+        <div className="mr-4 flex text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-5 h-5 mr-2"
+            className="mr-2 h-5 w-5"
           >
             <path
               fillRule="evenodd"
@@ -35,12 +35,12 @@ const Header = ({
 
           <span className="text-yellow-500">{points}</span>
         </div>
-        <div className="text-white mr-1 flex">
+        <div className="mr-1 flex text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-5 h-5 mr-2"
+            className="mr-2 h-5 w-5"
           >
             <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
             <path d="M11.603 7.963a.75.75 0 00-.977 1.138 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.536l1.225-1.224a.75.75 0 00-1.061-1.06l-1.224 1.224a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />
@@ -51,7 +51,7 @@ const Header = ({
       </div>
       <button
         onClick={() => setShowToplist(true)}
-        className="w-12 h-12 flex justify-center ml-auto items-center text-white hover:text-gray-400"
+        className="ml-auto flex h-12 w-12 items-center justify-center text-white hover:text-gray-400"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +59,7 @@ const Header = ({
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"
@@ -69,7 +69,7 @@ const Header = ({
         </svg>
       </button>
       <button
-        className="w-12 h-12 flex justify-center items-center hover:text-gray-400"
+        className="flex h-12 w-12 items-center justify-center hover:text-gray-400"
         onClick={() => setShowNameMenu(true)}
       >
         <svg
@@ -78,7 +78,7 @@ const Header = ({
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"

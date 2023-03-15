@@ -1,7 +1,7 @@
 const NextWord = ({ initGameField }) => {
   return (
     <button
-      className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+      className="mt-4 rounded-full border border-black bg-[#25a525] px-4 py-3 text-white"
       onClick={initGameField}
     >
       Nästa ord

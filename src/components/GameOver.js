@@ -6,40 +6,40 @@ const GameOver = ({
   setShowToplist,
 }) => {
   return (
-    <div className="absolute inset-0 w-full h-full flex flex-col justify-center items-center   bg-black p-12 bg-opacity-70 text-white  text-center rounded-xl">
-      <p className=" whitespace-nowrap mb-1">Rätt ord:</p>
-      <p className="flex mb-6">
+    <div className="absolute inset-0 flex h-full w-full flex-col items-center justify-center   rounded-xl bg-black bg-opacity-70 p-12  text-center text-white">
+      <p className=" mb-1 whitespace-nowrap">Rätt ord:</p>
+      <p className="mb-6 flex">
         {correctWord.split("").map((l, index) => (
           <span
             key={index}
-            className="w-8 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full"
+            className="circle--correct mx-1 grid h-8  w-8 place-items-center rounded-full text-lg font-bold uppercase text-white"
           >
             {l}
           </span>
         ))}
       </p>
-      <p className=" whitespace-nowrap flex items-center mb-2">
+      <p className=" mb-2 flex items-center whitespace-nowrap">
         Du fick
-        <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+        <span className="circle--correct mx-1 grid h-8 min-w-[2rem]  place-items-center rounded-full px-2 text-lg font-bold uppercase text-white">
           {points}
         </span>
         poäng
       </p>
-      <p className=" whitespace-nowrap flex items-center">
+      <p className=" flex items-center whitespace-nowrap">
         Du hade
-        <span className="min-w-[2rem] px-2 h-8 mx-1 circle--correct  text-white font-bold grid place-items-center text-lg uppercase rounded-full">
+        <span className="circle--correct mx-1 grid h-8 min-w-[2rem]  place-items-center rounded-full px-2 text-lg font-bold uppercase text-white">
           {inARow}
         </span>
         rätt i rad
       </p>
       <button
-        className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+        className="mt-4 rounded-full border border-black bg-[#25a525] px-4 py-3 text-white"
         onClick={startNewGame}
       >
         Nytt spel
       </button>
       <button
-        className="bg-[#25a525] text-white px-4 py-3 rounded-full border border-black mt-4"
+        className="mt-4 rounded-full border border-black bg-[#25a525] px-4 py-3 text-white"
         onClick={() => setShowToplist(true)}
       >
         Topplistan

@@ -220,7 +220,10 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const checkIfValid = async () => {
     return new Promise((resolve) => {
-      if ((words.filter((word) => word.toLowerCase() == guess).length > 0) && (guess.charAt(0) === correctWord.charAt(0))) {
+      if (
+        words.filter((word) => word.toLowerCase() == guess).length > 0 &&
+        guess.charAt(0) === correctWord.charAt(0)
+      ) {
         setPlayLocked(true);
         resolve();
       } else {
@@ -345,7 +348,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   return (
     <div
-      className={`bg w-screen h-screen relative overflow-hidden flex flex-col items-center transition-all duration-700`}
+      className={`bg relative flex h-screen w-screen flex-col items-center overflow-hidden transition-all duration-700`}
     >
       <Loading isLoading={isLoading} />
       <Overlay showNameMenu={showNameMenu} showToplist={showToplist} />

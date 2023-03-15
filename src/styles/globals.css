@@ -3,13 +3,7 @@
 @tailwind utilities;
 
 .bg {
-  /* 111827 */
-/* 1f2937 */
-  background: radial-gradient(
-    circle,
-    #09083b 0%,
-    #1e1616 100%
-  );
+  background: radial-gradient(circle, #09083b 0%, #1e1616 100%);
 }
 .circle {
   background: radial-gradient(circle at 80% 50%, #c0c0c0, #000047);

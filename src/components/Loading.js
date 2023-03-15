@@ -2,18 +2,18 @@ const Loading = ({ isLoading }) => {
   return (
     <div
       className={`${
-        isLoading ? "opacity-100" : "opacity-0 pointer-events-none"
-      } absolute transition-opacity duration-500 w-screen h-screen inset-0 bg-black bg-opacity-50 backdrop-blur-md flex flex-col justify-center items-center z-50`}
+        isLoading ? "opacity-100" : "pointer-events-none opacity-0"
+      } absolute inset-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-50 backdrop-blur-md transition-opacity duration-500`}
     >
       {isLoading && (
         <>
-          <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
+          <p className="loading-text absolute top-1/2 -mt-12 w-screen text-center text-lg text-white opacity-0">
             Du hade fel
           </p>
-          <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
+          <p className="loading-text absolute top-1/2 -mt-12 w-screen text-center text-lg text-white opacity-0">
             Kontrollerar hur fel
           </p>
-          <p className="loading-text w-screen absolute top-1/2 text-center opacity-0 text-white text-lg -mt-12">
+          <p className="loading-text absolute top-1/2 -mt-12 w-screen text-center text-lg text-white opacity-0">
             Sparar
           </p>
         </>

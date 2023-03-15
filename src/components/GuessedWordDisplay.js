@@ -7,7 +7,7 @@ const GuessedWordDisplay = ({ guess }) => {
         .map((l, index) => (
           <span
             key={index}
-            className="w-12 h-12 circle  text-white font-bold grid place-items-center text-2xl uppercase rounded-full"
+            className="circle grid h-12  w-12 place-items-center rounded-full text-2xl font-bold uppercase text-white"
           >
             {l}
           </span>

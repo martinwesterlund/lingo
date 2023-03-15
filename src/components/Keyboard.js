@@ -9,15 +9,15 @@ const Keyboard = ({
 }) => {
   return (
     <div
-      className={`w-full flex flex-col gap-y-1 absolute bottom-16 md:bottom-1 px-2 text-xs sm:text-base  ${
+      className={`absolute bottom-16 flex w-full flex-col gap-y-1 px-2 text-xs sm:text-base md:bottom-1  ${
         showErrorAnimation ? "wrong-word" : ""
       }`}
     >
-      <div className="w-full flex justify-center gap-x-1">
+      <div className="flex w-full justify-center gap-x-1">
         {keyboard[0].map((button) => (
           <button
             key={button}
-            className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
+            className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
               showNameMenu
                 ? setName((prev) => (prev + button.toUpperCase()).slice(0, 20))
@@ -28,11 +28,11 @@ const Keyboard = ({
           </button>
         ))}
       </div>
-      <div className="w-full flex justify-center gap-x-1">
+      <div className="flex w-full justify-center gap-x-1">
         {keyboard[1].map((button) => (
           <button
             key={button}
-            className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
+            className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
               showNameMenu
                 ? setName((prev) => (prev + button.toUpperCase()).slice(0, 20))
@@ -43,11 +43,11 @@ const Keyboard = ({
           </button>
         ))}
       </div>
-      <div className="w-full flex justify-center gap-x-1">
+      <div className="flex w-full justify-center gap-x-1">
         {keyboard[2].map((button) => (
           <button
             key={button}
-            className="bg-gray-100 w-[8vw] h-[8vw] sm:w-12 sm:h-12 rounded-md sm:rounded-lg"
+            className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
               showNameMenu
                 ? setName((prev) => (prev + button.toUpperCase()).slice(0, 20))
@@ -58,7 +58,7 @@ const Keyboard = ({
           </button>
         ))}
         <button
-          className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
+          className="grid h-[8vw] w-[calc(16vw+4px)] place-items-center rounded-md bg-gray-100 sm:h-12 sm:w-[calc(6rem+4px)] sm:rounded-lg"
           onClick={() =>
             showNameMenu
               ? setName((prev) => prev.slice(0, -1))
@@ -71,7 +71,7 @@ const Keyboard = ({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4 sm:w-6 sm:h-6"
+            className="h-4 w-4 sm:h-6 sm:w-6"
           >
             <path
               strokeLinecap="round"
@@ -81,7 +81,7 @@ const Keyboard = ({
           </svg>
         </button>
         <button
-          className="bg-gray-100 grid place-items-center w-[calc(16vw+4px)] h-[8vw] sm:w-[calc(6rem+4px)] sm:h-12 rounded-md sm:rounded-lg"
+          className="grid h-[8vw] w-[calc(16vw+4px)] place-items-center rounded-md bg-gray-100 sm:h-12 sm:w-[calc(6rem+4px)] sm:rounded-lg"
           onClick={(e) => (showNameMenu ? saveName() : submitGuess(e))}
         >
           <svg
@@ -90,7 +90,7 @@ const Keyboard = ({
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4 sm:w-6 sm:h-6"
+            className="h-4 w-4 sm:h-6 sm:w-6"
           >
             <path
               strokeLinecap="round"
@@ -103,7 +103,7 @@ const Keyboard = ({
       <button
         className={`bg-gray-100 ${
           showNameMenu ? "h-[8vw] sm:h-12" : "h-0"
-        } transition-all duration-500 ease-in-out w-[calc(56vw+24px)] sm:w-[calc(21rem+24px)] mx-auto rounded-md sm:rounded-lg my-0`}
+        } mx-auto my-0 w-[calc(56vw+24px)] rounded-md transition-all duration-500 ease-in-out sm:w-[calc(21rem+24px)] sm:rounded-lg`}
         onClick={(e) => setName((prev) => (prev + " ").slice(0, 20))}
       ></button>
     </div>

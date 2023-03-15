@@ -3,10 +3,10 @@ const Name = ({ name, showNameMenu, saveName }) => {
     <div
       className={`fixed ${
         showNameMenu ? "top-0" : " -top-32"
-      } transition-all duration-500 ease-in-out left-0 w-full h-32 bg-gray-900 flex justify-center items-center text-white`}
+      } left-0 flex h-32 w-full items-center justify-center bg-gray-900 text-white transition-all duration-500 ease-in-out`}
     >
       Ditt namn: <span className="ml-4 uppercase"> {name}</span>{" "}
-      <span className="marker ml-px bg-white h-6 w-px"></span>
+      <span className="marker ml-px h-6 w-px bg-white"></span>
       <button
         className="absolute right-8 bottom-6 text-green-500"
         onClick={() => saveName()}
@@ -17,7 +17,7 @@ const Name = ({ name, showNameMenu, saveName }) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"

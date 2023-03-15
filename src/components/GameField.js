@@ -32,19 +32,19 @@ const GameField = ({ gameField }) => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid grid-cols-5 grid-rows-5 w-[80vw] h-[80vw] sm:w-[70vw] sm:h-[70vw] max-w-sm max-h-[24rem] mx-auto gap-[2px] mt-6"
+        className="mx-auto mt-6 grid h-[80vw] max-h-[24rem] w-[80vw] max-w-sm grid-cols-5 grid-rows-5 gap-[2px] sm:h-[70vw] sm:w-[70vw]"
       >
         {gameField.map((s, index) => (
           <motion.div
             key={index}
             variants={item}
-            className={`circle  text-white font-bold grid place-items-center text-4xl uppercase rounded-full  ${
+            className={`circle  grid place-items-center rounded-full text-4xl font-bold uppercase text-white  ${
               s.correct ? "circle--correct" : ""
             } ${s.semiCorrect ? "p-[2px]" : ""}`}
           >
             <div
-              className={`w-full h-full grid place-items-center text-2xl sm:text-4xl ${
-                s.semiCorrect ? "border-[#e3ff0b] border-4 rounded-full" : ""
+              className={`grid h-full w-full place-items-center text-2xl sm:text-4xl ${
+                s.semiCorrect ? "rounded-full border-4 border-[#e3ff0b]" : ""
               }`}
             >
               {s.value}
@@ -61,7 +61,7 @@ const GameField = ({ gameField }) => {
               delay: 2,
             },
           }}
-          className="h-px max-w-sm my-6 mx-auto bg-gray-700"
+          className="my-6 mx-auto h-px max-w-sm bg-gray-700"
         ></motion.div>
       </div>
     </>

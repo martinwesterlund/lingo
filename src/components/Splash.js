@@ -33,7 +33,7 @@ const Splash = ({ name }) => {
       initial={{ y: 0 }}
       animate={{ y: "-100%" }}
       transition={{ duration: 2, delay: 1.5, ease: [0.71, 0.04, 0.13, 0.95] }}
-      className="absolute w-screen h-screen flex flex-col justify-center items-center bg-gray-900 shadow-md text-white z-50"
+      className="absolute z-50 flex h-screen w-screen flex-col items-center justify-center bg-gray-900 text-white shadow-md"
     >
       {letters && (
         <motion.div
@@ -46,7 +46,7 @@ const Splash = ({ name }) => {
             <motion.div
               key={index}
               variants={item}
-              className={`circle circle--correct w-8 h-8 md:w-16 md:h-16 text-white font-bold grid place-items-center text-xl md:text-4xl uppercase rounded-full mx-1`}
+              className={`circle circle--correct mx-1 grid h-8 w-8 place-items-center rounded-full text-xl font-bold uppercase text-white md:h-16 md:w-16 md:text-4xl`}
             >
               {l}
             </motion.div>
@@ -54,7 +54,7 @@ const Splash = ({ name }) => {
         </motion.div>
       )}
       {name !== null && name !== "Anonym" && (
-        <p className="text-white mt-12">Välkommen tillbaka {name}!</p>
+        <p className="mt-12 text-white">Välkommen tillbaka {name}!</p>
       )}
     </motion.div>
   );
