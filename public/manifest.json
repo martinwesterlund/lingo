@@ -8,7 +8,7 @@
   "short_name": "Lingo",
   "icons": [
       {
-          "src": "/128.png",
+          "src": "/logo.png",
           "sizes": "128x128",
           "type": "image/png"
       },
