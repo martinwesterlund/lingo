@@ -9,7 +9,22 @@
   "icons": [
       {
           "src": "/splashimg.png",
-          "sizes": "5x5",
+          "sizes": "128x128",
+          "type": "image/png"
+      },
+      {
+          "src": "/splashimg.png",
+          "sizes": "196x196",
+          "type": "image/png"
+      },
+      {
+          "src": "/splashimg.png",
+          "sizes": "256x256",
+          "type": "image/png"
+      },
+      {
+          "src": "/splashimg.png",
+          "sizes": "512x512",
           "type": "image/png"
       }
   ]
