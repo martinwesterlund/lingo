@@ -7,6 +7,12 @@ export default function Document() {
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/logo.png"></link>
       <meta name="theme-color" content="#111827" />
+      <title>Lingo</title>
+      <meta property="og:title" content="Lingo" key="title" />
+      <meta
+        name="description"
+        content="Gissa rätt ord så snabbt som möjligt!"
+      />
       <body>
         <Main />
         <NextScript />

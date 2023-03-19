@@ -8,6 +8,7 @@ const Name = ({ name, showNameMenu, saveName }) => {
       Ditt namn: <span className="ml-4 uppercase"> {name}</span>{" "}
       <span className="marker ml-px h-6 w-px bg-white"></span>
       <button
+        aria-label={`Spara namn`}
         className="absolute right-8 bottom-6 text-green-500"
         onClick={() => saveName()}
       >

@@ -11,6 +11,7 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
     >
       <h1 className="text-shadow mb-8 text-center">Topp 10</h1>
       <button
+        aria-label={`Stäng topplistan`}
         className="absolute top-6 right-6"
         onClick={() => setShowToplist(false)}
       >
@@ -31,6 +32,7 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
       </button>
       <div className="mb-6 text-center">
         <button
+          aria-label={`Visa poänglistan`}
           className={`
             ${
               listToShow === "points"
@@ -42,6 +44,7 @@ const Toplist = ({ toplist, inARowToplist, showToplist, setShowToplist }) => {
           <h2>Poäng</h2>
         </button>
         <button
+          aria-label={`Visa i-rad-listan`}
           className={`
           ${
             listToShow === "inARow"

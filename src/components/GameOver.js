@@ -33,12 +33,14 @@ const GameOver = ({
         rätt i rad
       </p>
       <button
+        aria-label="Starta nytt spel"
         className="mt-4 rounded-full border border-black bg-[#25a525] px-4 py-3 text-white"
         onClick={startNewGame}
       >
         Nytt spel
       </button>
       <button
+        aria-label="Visa topplistan"
         className="mt-4 rounded-full border border-black bg-[#25a525] px-4 py-3 text-white"
         onClick={() => setShowToplist(true)}
       >

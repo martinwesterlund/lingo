@@ -16,6 +16,7 @@ const Keyboard = ({
       <div className="flex w-full justify-center gap-x-1">
         {keyboard[0].map((button) => (
           <button
+            aria-label={`Välj bokstav ${button}`}
             key={button}
             className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
@@ -31,6 +32,7 @@ const Keyboard = ({
       <div className="flex w-full justify-center gap-x-1">
         {keyboard[1].map((button) => (
           <button
+            aria-label={`Välj bokstav ${button}`}
             key={button}
             className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
@@ -46,6 +48,7 @@ const Keyboard = ({
       <div className="flex w-full justify-center gap-x-1">
         {keyboard[2].map((button) => (
           <button
+            aria-label={`Välj bokstav ${button}`}
             key={button}
             className="h-[8vw] w-[8vw] rounded-md bg-gray-100 sm:h-12 sm:w-12 sm:rounded-lg"
             onClick={() =>
@@ -58,6 +61,7 @@ const Keyboard = ({
           </button>
         ))}
         <button
+          aria-label={`Backspace`}
           className="grid h-[8vw] w-[calc(16vw+4px)] place-items-center rounded-md bg-gray-100 sm:h-12 sm:w-[calc(6rem+4px)] sm:rounded-lg"
           onClick={() =>
             showNameMenu
@@ -81,6 +85,7 @@ const Keyboard = ({
           </svg>
         </button>
         <button
+          aria-label={`Gissa ord`}
           className="grid h-[8vw] w-[calc(16vw+4px)] place-items-center rounded-md bg-gray-100 sm:h-12 sm:w-[calc(6rem+4px)] sm:rounded-lg"
           onClick={(e) => (showNameMenu ? saveName() : submitGuess(e))}
         >
@@ -101,6 +106,7 @@ const Keyboard = ({
         </button>
       </div>
       <button
+        aria-label={`Space`}
         className={`bg-gray-100 ${
           showNameMenu ? "h-[8vw] sm:h-12" : "h-0"
         } mx-auto my-0 w-[calc(56vw+24px)] rounded-md transition-all duration-500 ease-in-out sm:w-[calc(21rem+24px)] sm:rounded-lg`}

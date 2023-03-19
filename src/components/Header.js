@@ -55,6 +55,7 @@ const Header = ({
       </div>
       <Timer time={time} setTime={setTime} isRunning={isRunning} />
       <button
+        aria-label="Visa topplistan"
         onClick={() => setShowToplist(true)}
         className="flex h-12 w-12 items-center justify-center text-white hover:text-gray-400"
       >
@@ -74,6 +75,7 @@ const Header = ({
         </svg>
       </button>
       <button
+        aria-label="Visa namn-menyn"
         className="flex h-12 w-12 items-center justify-center hover:text-gray-400"
         onClick={() => setShowNameMenu(true)}
       >
