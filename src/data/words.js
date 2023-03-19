@@ -7523,7 +7523,6 @@ export const filteredWords = [
   "vråla",
   "vrång",
   "vräka",
-  "vulka",
   "vulst",
   "vulva",
   "vurma",
