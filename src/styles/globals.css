@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 .bg {
   background: radial-gradient(circle, #09083b 0%, #1e1616 100%);

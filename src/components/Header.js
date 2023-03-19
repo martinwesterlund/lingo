@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Timer from "./Timer";
 
 const Header = ({
   isExploding,
@@ -6,6 +7,9 @@ const Header = ({
   inARow,
   setShowToplist,
   setShowNameMenu,
+  time,
+  setTime,
+  isRunning
 }) => {
   return (
     <motion.header
@@ -49,9 +53,10 @@ const Header = ({
           <span className="text-yellow-500">{inARow}</span>
         </div>
       </div>
+      <Timer time={time} setTime={setTime} isRunning={isRunning} />
       <button
         onClick={() => setShowToplist(true)}
-        className="ml-auto flex h-12 w-12 items-center justify-center text-white hover:text-gray-400"
+        className="flex h-12 w-12 items-center justify-center text-white hover:text-gray-400"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

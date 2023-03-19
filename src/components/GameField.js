@@ -32,7 +32,7 @@ const GameField = ({ gameField }) => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="mx-auto mt-6 grid h-[80vw] max-h-[24rem] w-[80vw] max-w-sm grid-cols-5 grid-rows-5 gap-[2px] sm:h-[70vw] sm:w-[70vw]"
+        className="mx-auto mt-2 grid h-[80vw] max-h-[24rem] w-[80vw] max-w-sm grid-cols-5 grid-rows-5 gap-[2px] sm:h-[70vw] sm:w-[70vw]"
       >
         {gameField.map((s, index) => (
           <motion.div

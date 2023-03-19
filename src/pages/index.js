@@ -44,6 +44,8 @@ export default function Home({ toplistOne, toplistTwo }) {
   const [showToplist, setShowToplist] = useState(false);
   const [isExploding, setIsExploding] = useState(false);
   const [sounds, setSounds] = useState([]);
+  const [time, setTime] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
 
   const sendScoreToDatabase = async (data) => {
     const response = await fetch("/api/new-score", {
@@ -68,6 +70,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const initGameField = async () => {
     setRound(1);
+    setTime(0);
     setCorrectState([
       { correct: true },
       { correct: false },
@@ -79,7 +82,6 @@ export default function Home({ toplistOne, toplistTwo }) {
     setIsExploding(false);
     setPlayLocked(false);
     let newWord = await getWordFromDb();
-    // console.log(newWord);
     setCorrectWord(newWord);
     return new Promise((resolve) => {
       let squares = [];
@@ -207,9 +209,22 @@ export default function Home({ toplistOne, toplistTwo }) {
   const checkIfCorrectWord = (word) => {
     let wordToCheck = word.slice(0).slice(-5);
     if (wordToCheck.every((item) => item.correct === true)) {
+      stopTimer();
       setIsExploding(true);
-      setPoints((prev) => prev + scoreLadder[5 - round]);
-      setHighlightScore(scoreLadder[5 - round]);
+      let formattedTime = Math.round(time / 1000);
+      setPoints((prev) =>
+        Math.round(
+          prev +
+            scoreLadder[5 - round] *
+              (formattedTime <= 50 ? (50 - formattedTime) / 25 : 1)
+        )
+      );
+      setHighlightScore(
+        Math.round(
+          scoreLadder[5 - round] *
+            (formattedTime <= 50 ? (50 - formattedTime) / 25 : 1)
+        )
+      );
       setInARow((prev) => prev + 1);
     } else {
       setTimeout(() => {
@@ -288,6 +303,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const showCorrectAnswer = async () => {
     setIsLoading(true);
+    stopTimer();
     let response = await sendScoreToDatabase({
       name: name,
       points: points,
@@ -307,6 +323,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const submitGuess = useCallback(async () => {
     if (!playLocked) {
+      startTimer();
       await checkIfValid();
       let checkedWord = await checkGuess(guess, correctWord);
       await presentWord(checkedWord, checkIfCorrectWord);
@@ -314,6 +331,14 @@ export default function Home({ toplistOne, toplistTwo }) {
       setRound((prev) => prev + 1);
     }
   });
+
+  const startTimer = () => {
+    setIsRunning(true);
+  };
+
+  const stopTimer = () => {
+    setIsRunning(false);
+  };
 
   useEffect(() => {
     setSounds([
@@ -348,7 +373,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   return (
     <div
-      className={`bg relative flex h-screen w-screen flex-col items-center overflow-hidden transition-all duration-700`}
+      className={`bg font-lingo relative flex h-screen w-screen flex-col items-center overflow-hidden transition-all duration-700`}
     >
       <Loading isLoading={isLoading} />
       <Overlay showNameMenu={showNameMenu} showToplist={showToplist} />
@@ -366,6 +391,9 @@ export default function Home({ toplistOne, toplistTwo }) {
         inARow={inARow}
         setShowToplist={setShowToplist}
         setShowNameMenu={setShowNameMenu}
+        time={time}
+        setTime={setTime}
+        isRunning={isRunning}
       />
       <Toplist
         toplist={toplist}
@@ -376,7 +404,7 @@ export default function Home({ toplistOne, toplistTwo }) {
       <Name name={name} showNameMenu={showNameMenu} saveName={saveName} />
       {gameField && showGameField && <GameField gameField={gameField} />}
       <GuessedWordDisplay guess={guess} />
-      {isExploding && <NextWord initGameField={initGameField} />}
+      <NextWord initGameField={initGameField} isExploding={isExploding} />
       <Keyboard
         keyboard={keyboard}
         setName={setName}

@@ -3,7 +3,7 @@ const Loading = ({ isLoading }) => {
     <div
       className={`${
         isLoading ? "opacity-100" : "pointer-events-none opacity-0"
-      } absolute inset-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-50 backdrop-blur-md transition-opacity duration-500`}
+      } absolute inset-0 z-50 flex h-screen w-screen flex-col items-center justify-center bg-black bg-opacity-50 backdrop-blur-md transition-opacity duration-500 uppercase`}
     >
       {isLoading && (
         <>

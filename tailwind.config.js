@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+      fontFamily: {
+        'lingo': ['Noto Sans lao', 'sans-serif']
       }
     }
   },
