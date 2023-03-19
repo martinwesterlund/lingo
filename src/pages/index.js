@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { keyboard } from "@/data/keyboard";
-import { words } from "@/data/words";
+import { words, filteredWords } from "@/data/words";
 import ConfettiExplosion from "react-confetti-explosion";
 import { MongoClient } from "mongodb";
 import Toplist from "@/components/Toplist";
@@ -107,7 +107,7 @@ export default function Home({ toplistOne, toplistTwo }) {
 
   const getWordFromDb = async () => {
     return new Promise((resolve) => {
-      let fiveLetteredWords = words.filter((word) => word.length == 5);
+      let fiveLetteredWords = filteredWords.filter((word) => word.length == 5);
       let word =
         fiveLetteredWords[
           Math.floor(Math.random() * fiveLetteredWords.length)
