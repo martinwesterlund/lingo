@@ -35,7 +35,7 @@ const Timer = ({ time, setTime, isRunning }) => {
         />
       </svg>
 
-      <div className="min-w-[4rem] text-center text-yellow-500">
+      <div className="min-w-[4rem] text-left text-yellow-500">
         <span>{formatTime(seconds)}</span>
         <span>:</span>
         <span>{formatTime(hundredths)}</span>
