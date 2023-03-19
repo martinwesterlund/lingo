@@ -4794,7 +4794,6 @@ export const filteredWords = [
   "banan",
   "banda",
   "bandy",
-  "baner",
   "banga",
   "banjo",
   "banka",

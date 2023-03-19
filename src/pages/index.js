@@ -211,18 +211,19 @@ export default function Home({ toplistOne, toplistTwo }) {
     if (wordToCheck.every((item) => item.correct === true)) {
       stopTimer();
       setIsExploding(true);
-      let formattedTime = Math.round(time / 1000);
+      let formattedTime = Math.round(time / 1000) + 1;
+      console.log('FT', formattedTime)
       setPoints((prev) =>
         Math.round(
           prev +
             scoreLadder[5 - round] *
-              (formattedTime <= 50 ? (50 - formattedTime) / 25 : 1)
+              (formattedTime <= 50 ? 1 + (50 - formattedTime) / 50 : 1)
         )
       );
       setHighlightScore(
         Math.round(
           scoreLadder[5 - round] *
-            (formattedTime <= 50 ? (50 - formattedTime) / 25 : 1)
+            (formattedTime <= 50 ? 1 + (50 - formattedTime) / 50 : 1)
         )
       );
       setInARow((prev) => prev + 1);
